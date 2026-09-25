@@ -1,8 +1,37 @@
-![Auto Assign](https://github.com/Qubuhub-org/demo-repository/actions/workflows/auto-assign.yml/badge.svg)
+# Aura Dashboard Demo
 
-![Proof HTML](https://github.com/Qubuhub-org/demo-repository/actions/workflows/proof-html.yml/badge.svg)
+A responsive dashboard page built with React, Vite, TypeScript, and Tailwind CSS.
 
-# Welcome to your organization's demo respository
-This code repository (or "repo") is designed to demonstrate the best GitHub has to offer with the least amount of noise.
+## Local development
 
-The repo includes an `index.html` file (so it can render a web page), two GitHub Actions workflows, and a CSS stylesheet dependency.
+Install dependencies:
+
+```bash
+npm install
+```
+
+Start the Vite development server:
+
+```bash
+npm run dev
+```
+
+Open the app at the local URL printed by Vite, then visit:
+
+```text
+/dashboard
+```
+
+The Vite history fallback also renders the dashboard at `/` for convenience.
+
+## Production build
+
+```bash
+npm run build
+```
+
+Preview the built app locally:
+
+```bash
+npm run preview
+```

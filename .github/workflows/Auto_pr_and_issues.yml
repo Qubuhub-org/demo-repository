@@ -1,4 +1,4 @@
-name: Aura Issue & PR Automation
+name: Auto Issue & PR Automation
 
 on:
   issues:
@@ -10,18 +10,15 @@ permissions:
   issues: write
   pull-requests: write
   contents: read
-  pages: write
-  id-token: write
-  packages: write
   
 jobs:
   automation:
-    runs-on: ubuntu-24.04
+    runs-on: ubuntu-latest
 
     steps:
       - name: Auto assign Issue
         if: github.event_name == 'issues'
-        uses: actions/github-script@v8
+        uses: actions/github-script@v7
         with:
           github-token: ${{ secrets.GITHUB_TOKEN }}
           script: |
@@ -34,7 +31,7 @@ jobs:
 
       - name: Welcome Pull Request
         if: github.event_name == 'pull_request'
-        uses: actions/github-script@v8
+        uses: actions/github-script@v7
         with:
           github-token: ${{ secrets.GITHUB_TOKEN }}
           script: |
@@ -45,7 +42,7 @@ jobs:
               body: `
               ## 👋 Welcome to the Aura Ecosystem
 
-              Thanks for contributing to **Web4Hub / Aura Ecosystem**.
+              Thanks for contributing to **Web4 / Aura Ecosystem**.
 
               - ✅ CI will validate your changes.
               - 🤖 APLCE compiler checks will run.

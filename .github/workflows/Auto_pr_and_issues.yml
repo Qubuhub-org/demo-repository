@@ -10,7 +10,10 @@ permissions:
   issues: write
   pull-requests: write
   contents: read
-
+  pages: write
+  id-token: write
+  packages: write
+  
 jobs:
   automation:
     runs-on: ubuntu-24.04

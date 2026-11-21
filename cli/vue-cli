@@ -1,4 +1,0 @@
-!#bin/env shell-nix
-$ vue init Web4hub/vue-django-webpack-boilerplate my-project  # Follow the prompts
-$ cd vue-django-webpack-boilerplate
-$ npm install

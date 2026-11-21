@@ -276,4 +276,73 @@ Go Authentication API
 
 **One important safeguard:** Before deployment, fix the existing `.env` tracking and the GitHub Pages workflow that uploads the entire repository. Publish only the production build directory, such as `dist/`.
 
-I can prepare the complete implementation against the repository, but I need access to its source through an authorized GitHub workspace or an uploaded repository archive before claiming any code changes have been made.
+Let's prepare a **repo-specific authentication implementation plan** for [Qubuhub-org/demo-repository](https://github.com/Qubuhub-org/demo-repository?utm_source=chatgpt.com).
+
+The existing React + Vite + TypeScript dashboard should remain intact. Authentication will be added without unnecessarily replacing its current components.
+
+## **Proposed architecture**
+
+**React + Vite frontend**
+
+Login · Logout · Protected dashboard · User profile
+
+**Authentication API**
+
+Registration · Login · Logout · Session validation
+
+**Identity & access**
+
+Password hashing · Roles · Permissions
+
+**Database**
+
+Users · Sessions · Audit records
+
+## **Implementation stages**
+
+1. **Authentication UI:** Add login, registration, logout and account screens.
+2. **Authentication backend:** Implement registration, password verification and session management.
+3. **Security:** Use Argon2id password hashing, secure HttpOnly cookies, CSRF protection and server-side authorization.
+4. **Dashboard protection:** Require a valid authenticated session before showing protected dashboard data.
+5. **Roles:** Introduce administrator and standard-user permissions.
+6. **Testing:** Test login failures, session expiry, unauthorized access, logout and role restrictions.
+7. **Deployment:** Configure production environment variables and prevent `.env` files from entering GitHub Pages artifacts.
+
+## **Important security repairs first**
+
+- Stop deploying the entire repository using `path: '.'`; deploy only the built `dist/` directory.
+- Check the tracked `.env` file for credentials. Rotate any real credentials if exposed.
+- Add `.env`, `.env.*` and appropriate exceptions for safe example files to `.gitignore`.
+- Consolidate the overlapping GitHub issue-assignment workflows.
+
+## **One architectural decision**
+
+Which authentication approach should I build around?
+
+**1. Backend**
+
+Go authentication API
+
+Node.js / TypeScript API
+
+Keep the existing frontend and add a lightweight backend
+
+**2. Identity system**
+
+Independent, self-managed authentication
+
+Self-managed authentication + optional OAuth login
+
+**3. Database**
+
+PostgreSQL
+
+SQLite
+
+MongoDB
+
+Confirm architecture
+
+My recommendation: **Go + PostgreSQL + independent authentication** for a self-managed system with no mandatory third-party identity provider.
+
+

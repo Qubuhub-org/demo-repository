@@ -1,0 +1,39 @@
+name: Auto Assign Issues
+
+on:
+  issues:
+    types:
+      - opened
+      - reopened
+      - assigned
+
+permissions:
+  issues: write
+  contents: read
+
+jobs:
+  auto-assign:
+    name: Assign issue to Aura Ecosystem maintainer
+    runs-on: ubuntu-24.04
+
+    steps:
+      - name: Assign issue
+        uses: actions/github-script@v8
+        with:
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          script: |
+            const issue = context.payload.issue;
+
+            if (!issue) {
+              core.setFailed("No issue found in GitHub context.");
+              return;
+            }
+
+            await github.rest.issues.addAssignees({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              issue_number: issue.number,
+              assignees: ["auraecosystem"]
+            });
+
+            core.info(`Assigned issue #${issue.number} to auraecosystem.`);

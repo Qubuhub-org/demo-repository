@@ -1,7 +1,5 @@
-import tailwindcss from '@tailwindcss/vite';
-import react from '@vitejs/plugin-react';
-import { defineConfig } from 'vite';
-
-export default defineConfig({
-  plugins: [react(), tailwindcss()],
-});
+import HomePage from "@pages/Home";
+import Navbar from "@components/Navbar";
+import { useWeb4 } from "@web4/useWeb4";
+import { LmlmClient } from "@lmlm/client";
+import { WalletProvider } from "@qubuhub/wallet";

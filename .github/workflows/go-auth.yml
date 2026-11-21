@@ -1,0 +1,30 @@
+name: Go authentication API checks
+
+on:
+  pull_request:
+    paths:
+      - "server/**"
+      - "go.mod"
+      - "go.sum"
+      - ".github/workflows/go-auth.yml"
+  push:
+    branches: ["main"]
+    paths:
+      - "server/**"
+      - "go.mod"
+      - "go.sum"
+
+permissions:
+  contents: read
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-go@v5
+        with:
+          go-version: "1.23"
+          cache: true
+      - run: go mod tidy
+      - run: go test ./...

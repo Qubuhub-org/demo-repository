@@ -1,0 +1,51 @@
+name: Aura Issue & PR Automation
+
+on:
+  issues:
+    types: [opened, reopened]
+  pull_request:
+    types: [opened, ready_for_review]
+
+permissions:
+  issues: write
+  pull-requests: write
+  contents: read
+
+jobs:
+  automation:
+    runs-on: ubuntu-24.04
+
+    steps:
+      - name: Auto assign Issue
+        if: github.event_name == 'issues'
+        uses: actions/github-script@v8
+        with:
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          script: |
+            await github.rest.issues.addAssignees({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              issue_number: context.issue.number,
+              assignees: ["auraecosystem"]
+            });
+
+      - name: Welcome Pull Request
+        if: github.event_name == 'pull_request'
+        uses: actions/github-script@v8
+        with:
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          script: |
+            await github.rest.issues.createComment({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              issue_number: context.issue.number,
+              body: `
+              ## 👋 Welcome to the Aura Ecosystem
+
+              Thanks for contributing to **Web4Hub / Aura Ecosystem**.
+
+              - ✅ CI will validate your changes.
+              - 🤖 APLCE compiler checks will run.
+              - 🌐 Web4 compatibility tests will execute.
+              `
+            });

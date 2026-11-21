@@ -7,10 +7,8 @@ import (
 	"database/sql"
 	"encoding/base64"
 	"encoding/json"
-	"errors"
 	"net/http"
 	"net/mail"
-	"os"
 	"strings"
 	"sync"
 	"time"
@@ -134,6 +132,3 @@ func subtleCompare(a,b []byte) bool { if len(a)!=len(b) { return false }; var di
 func normalizeEmail(v string) string { return strings.ToLower(strings.TrimSpace(v)) }
 func writeJSON(w http.ResponseWriter,status int,v any) { w.Header().Set("Content-Type","application/json"); w.WriteHeader(status); _=json.NewEncoder(w).Encode(v) }
 
-var _ = errors.New
-var _ = os.Getenv
-var _ = sql.ErrNoRows

@@ -1,0 +1,13 @@
+#!/usr/bin/env bash
+$ vue init qubuhub-org/vue-django-webpack-boilerplate my-project  # Follow the prompts
+$ cd vue-django-webpack-boilerplate
+$ npm install
+npm install -g @vue/cli
+npm install -g @vue/cli-init
+
+vue init Web4hub/vue-django-webpack-boilerplate my-project
+
+cd my-project
+
+npm run serve
+
